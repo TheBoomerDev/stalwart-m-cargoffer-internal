@@ -1,0 +1,45 @@
+[server]
+hostname = "mail.m.cargoffer.com"
+
+[server.listener.smtp]
+bind = "[::]:25"
+protocol = "smtp"
+
+[server.listener.submission]
+bind = "[::]:587"
+protocol = "smtp"
+
+[server.listener.submissions]
+bind = "[::]:465"
+protocol = "smtp"
+tls.implicit = true
+
+[server.listener.imaps]
+bind = "[::]:993"
+protocol = "imap"
+tls.implicit = true
+
+[server.listener.https]
+bind = "[::]:443"
+protocol = "http"
+tls.implicit = true
+
+[server.listener.http-redirect]
+bind = "[::]:80"
+protocol = "http"
+
+[certificate.default]
+default = true
+
+[storage]
+data = "rocksdb"
+blob = "rocksdb"
+lookup = "rocksdb"
+directory = "internal"
+
+[storage.rocksdb]
+path = "/opt/stalwart/data"
+
+[server.run-as]
+user = "stalwart"
+group = "stalwart"
