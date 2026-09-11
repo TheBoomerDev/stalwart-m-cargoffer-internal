@@ -9,8 +9,6 @@ services:
       - "993:993"
     volumes:
       - stalwart-data:/opt/stalwart/data
-      - stalwart-etc:/opt/stalwart/etc
-      - ./etc/config.toml:/opt/stalwart/etc/config.toml:ro
+      - ./etc:/opt/stalwart/etc
 volumes:
   stalwart-data:
-  stalwart-etc:
