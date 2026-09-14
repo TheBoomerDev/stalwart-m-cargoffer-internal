@@ -1,14 +1,29 @@
 services:
   stalwart:
-    image: stalwartlabs/stalwart:latest
+    image: stalwartlabs/stalwart:v0.16.21
     restart: unless-stopped
-    ports:
-      - "25:25"
-      - "465:465"
-      - "587:587"
-      - "993:993"
+    environment:
+      - STALWART_SERVICE_URL=https://d0setamr0vn6hogoatofpggi.srv.angotruck.com
+      - STALWART_ADMIN_PASSWORD=changeme
+    expose:
+      - '25'
+      - '465'
+      - '587'
+      - '993'
+      - '995'
+      - '143'
+      - '110'
+      - '4190'
+      - '8080'
     volumes:
-      - stalwart-data:/opt/stalwart/data
-      - ./etc:/opt/stalwart/etc
+      - stalwart-mail:/opt/stalwart/etc
+      - stalwart-data:/var/lib/stalwart
+      - /etc/localtime:/etc/localtime:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/admin"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 volumes:
+  stalwart-mail:
   stalwart-data:
